@@ -1,14 +1,23 @@
 # data-engineering-db-docker
 - Documents/data_engineering_db
   
-(if error: docker login then pull)
-  docker pull postgres 
-  
-- docker run --name data-engineering-postgres -e POSTGRES_PASSWORD=secret -d postgres (container name- data.engineering-postgres, image name- postgres)
-- docker exec -u postgres data-engineering-postgres createdb postgres-db (create db named postgers-db)
-- winpty docker exec -it data-engineering-postgres psql -U postgres -d postgres-db psql ( get insude the database )
+if error: docker login then pull
+    
+    docker pull postgres 
+   
+ container name- data.engineering-postgres, image name- postgres 
+    
+    docker run --name data-engineering-postgres -e POSTGRES_PASSWORD=secret -d postgres
 
-  # SQL
+  create db named postgers-db
+    
+     docker exec -u postgres data-engineering-postgres createdb postgres-db
+
+get insude the database
+
+    winpty docker exec -it data-engineering-postgres psql -U postgres -d postgres-db psql
+
+# SQL
 
 ## Commands:
 

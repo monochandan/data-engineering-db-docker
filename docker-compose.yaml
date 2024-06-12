@@ -1,0 +1,54 @@
+# in order to have 2 database we need one being our source (data from)
+# and other is destination (send to)
+version: '3'
+
+services:
+  # (source of postgresql database service)
+  source_postgres:
+    # list the image
+    image: postgres:15.6 # postgres image with latest version of it
+    ports: # for accessing
+      - "5433:5432" #
+    networks: # create networks for all of our containers
+      - elt_network # network name
+    environment: # environment veriables
+      POSTGRES_DB: source_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    volumes: # how we are able to persist data
+      - ./source_db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # (destination of postgresql database service)
+  # no need volume section : no need to save the data every single time
+  destination_postgres:
+    image: postgres:15.6
+    ports:
+      - "5434:5432"
+    networks:
+      - elt_network
+    environment:
+      POSTGRES_DB: destination_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+  
+  # to see actually utilizing a script here to see the data from source and detination databases
+  # ELT script service
+  elt_script:
+    build:
+      context: ./elt_script # Directory containing the Dockerfile and elt_script.py
+      dockerfile: Dockerfile # Name of the Dockerfile, if it's something other than "Dockerfile", specify here
+    command: [ "python", "elt_script.py" ]
+    networks:
+      - elt_network
+    depends_on: # this script will not run untill finishing the initializing
+      - source_postgres
+      - destination_postgres
+    ## added new
+    #environment:
+    #  - POSTGRES_PASSWORD=secret
+
+# within the network all of the containers are going to recognize that 
+# that ( elt_network ) is the network we want to talk
+networks:
+  elt_network:
+    driver: bridge 

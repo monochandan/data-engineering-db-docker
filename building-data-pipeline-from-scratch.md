@@ -33,4 +33,4 @@ To see the tables:
 
     \dt
 
-    <img width="382" alt="image" src="https://github.com/monochandan/data-engineering-db-docker/assets/29684226/2002fbfc-e80c-47c4-988d-294c28668acf">
+<img width="382" alt="image" src="https://github.com/monochandan/data-engineering-db-docker/assets/29684226/2002fbfc-e80c-47c4-988d-294c28668acf">    

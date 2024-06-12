@@ -20,3 +20,17 @@ so, in docker-compose.yaml file:
 
     destination_postgres:
         image: postgres:15.6 # changed from latest
+
+open anotehr bash terminal (dont compose down the previous one)
+
+    winpty docker exec -it elt-destination_postgres-1 psql -U postgres
+
+To connect to database destination_db:
+
+    \c destination_db
+    
+To see the tables:
+
+    \dt
+
+    <img width="382" alt="image" src="https://github.com/monochandan/data-engineering-db-docker/assets/29684226/2002fbfc-e80c-47c4-988d-294c28668acf">

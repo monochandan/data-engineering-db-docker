@@ -5,6 +5,8 @@
     touch docker-compose.yaml
 
     docker compose up
+    docker compose down
+
 
 
 # version mismatch between the PostgreSQL server and the pg_dump client.
